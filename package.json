@@ -1,10 +1,11 @@
 {
   "name": "vue-modal2",
   "version": "0.2.0",
-  "description": "A vue 2.0 modal solution",
-  "main": "src/vue-modal2.js",
+  "description": "A vue modal solution",
+  "main": "src/index.js",
   "scripts": {
-    "dev": "parcel demo/index.html"
+    "dev": "parcel demo/index.html",
+    "build": "rm -rf dist && parcel build src/index.js --no-source-maps"
   },
   "author": "Jarvis Niu",
   "license": "MIT",

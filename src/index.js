@@ -10,21 +10,17 @@ export default {
       show (name) {
         let modalEl = document.querySelector(`.v-modal[name=${name}]`)
         if (modalEl) {
-          modalEl.style.display = ''
-          modalEl.style.opacity = 1
+          modalEl.__vue__.show()
         } else {
-          console.error(`[v-modal] Can't find a modal with name "${name}"`)
+          console.error(`[v-modal] Can't find the modal with name "${name}"`)
         }
       },
       hide (name) {
         let modalEl = document.querySelector(`.v-modal[name=${name}]`)
         if (modalEl) {
-          modalEl.style.opacity = 0
-          setTimeout(() => {
-            modalEl.style.display = 'none'
-          }, 200)
+          modalEl.__vue__.hide()
         } else {
-          console.error(`[v-modal] Can't find a modal with name "${name}"`)
+          console.error(`[v-modal] Can't find the modal with name "${name}"`)
         }
       },
     }
