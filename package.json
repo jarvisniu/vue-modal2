@@ -1,23 +1,31 @@
 {
   "name": "vue-modal2",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A vue 2.0 modal solution",
   "main": "src/vue-modal2.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "parcel demo/index.html"
   },
+  "author": "Jarvis Niu",
+  "license": "MIT",
+  "homepage": "https://github.com/jarvisniu/vue-modal2#readme",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jarvisniu/vue-modal2.git"
+  },
+  "devDependencies": {
+    "@vue/component-compiler-utils": "^3.0.0",
+    "parcel-bundler": "^1.12.3",
+    "stylus": "^0.54.5",
+    "vue": "^2.6.10",
+    "vue-hot-reload-api": "^2.3.3",
+    "vue-template-compiler": "^2.6.10"
   },
   "keywords": [
     "vue",
     "modal"
   ],
-  "author": "Jarvis Niu",
-  "license": "MIT",
   "bugs": {
     "url": "https://github.com/jarvisniu/vue-modal2/issues"
-  },
-  "homepage": "https://github.com/jarvisniu/vue-modal2#readme"
+  }
 }
