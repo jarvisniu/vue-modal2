@@ -1,6 +1,6 @@
 <template>
   <div>
-    <!-- Data Binding -->
+    <!-- Data Binding -------------------------------------------------------->
     <div>
       <button @click="$modal.show('data-binding')">Data Binding</button>
       <span v-if="name">Hello, {{name}}!</span>
@@ -11,14 +11,29 @@
         <br>
         <div>
           <span>What's your name: </span>
-          <input v-model="name" style="width: 100px;">
+          <input
+            v-model="name" style="width: 100px;"
+            @keydown.enter="$modal.hide('data-binding')"
+          >
+        </div>
+        <br>
+        <div>
+          <button @click="$modal.hide('data-binding')">Confirm</button>
         </div>
       </div>
     </v-modal>
 
-    <!-- Dynamic Width -->
-    <button @click="$modal.show('dynamic-width')">Dynamic Width & pivot</button><br>
-    <v-modal name="dynamic-width" :width="modalWidth" :pivotY="pivotY">
+    <!-- Dynamic Width ------------------------------------------------------->
+    <button @click="$modal.show('dynamic-width')">Dynamic Width & pivot</button>
+    <span>Modal status: {{openStatus}}
+    <br>
+    <v-modal
+      name="dynamic-width" :width="modalWidth" :pivotY="pivotY"
+      @before-open="openStatus = 'opening'"
+      @opened="openStatus = 'opened'"
+      @before-close="openStatus = 'closing'"
+      @closed="openStatus = 'closed'"
+    >
       <div style="padding: 10px;">
         <h4 style="margin: 10px 0;">Dynamic Width: </h4>
         <div>
@@ -34,13 +49,13 @@
       </div>
     </v-modal>
 
-    <!-- Background & inner scroll & outer close button -->
+    <!-- Background & inner scroll & outer close button ---------------------->
     <button @click="$modal.show('outer-close-button')">
       Background & inner scroll & outer close button
     </button><br>
     <v-modal name="outer-close-button" :click-to-close="false" background="black">
       <div
-        style="position: absolute; right: -20px; top: -20px; color: white; cursor: pointer; padding: 0 5px;"
+        style="position: absolute; right: -28px; top: -28px; color: white; cursor: pointer; padding: 0 6px; font-size: 20px;"
         @click="$modal.hide('outer-close-button')"
       >×</div>
       <div style="height: 100%; overflow: auto; box-sizing: border-box; padding: 10px;">
@@ -61,6 +76,7 @@ export default {
       name: '',
       modalWidth: 300,
       pivotY: 0.5,
+      openStatus: 'closed',
     }
   },
 }

@@ -49,18 +49,24 @@ export default {
     // api ---------------------------------------------------------------------
     show () {
       this.$el.style.display = ''
+      this.$emit('before-open')
       setTimeout(() => {
         this.$el.style.opacity = 1
         this.offsetY = 0
         this.opacity = 1
+        setTimeout(() => {
+          this.$emit('opened')
+        }, this.duration * 1000)
       }, 0)
     },
     hide () {
       this.$el.style.opacity = 0
       this.offsetY = -50
       this.opacity = 0
+      this.$emit('before-close')
       setTimeout(() => {
         this.$el.style.display = 'none'
+        this.$emit('closed')
       }, this.duration * 1000)
     },
     // events ------------------------------------------------------------------

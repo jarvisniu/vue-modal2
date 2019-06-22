@@ -2,7 +2,7 @@
 
 ## Install
 
-```
+```sh
 npm install vue-modal2
 ```
 
@@ -28,6 +28,29 @@ Use your component:
   </div>
 </template>
 ```
+
+## Props
+
+| Name         | Type    | Required | Default               |
+| --           | --      | --       | --                    |
+| width        | Number  | false    | 600                   |
+| height       | Number  | false    | 300                   |
+| clickToClose | Boolean | false    | true                  |
+| pivotX       | Number  | false    | 0.5                   |
+| pivotY       | Number  | false    | 0.5                   |
+| background   | String  | false    | hsla(0, 0%, 25%, 0.5) |
+| duration     | Number  | false    | 0.3                   |
+
+## Events
+
+- before-open
+- opened
+- before-close
+- closed
+
+## TODO
+
+- percentage size
 
 ## License
 
