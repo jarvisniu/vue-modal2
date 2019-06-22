@@ -32,7 +32,7 @@
 export default {
   props: {
     width: { type: [Number, String], default: 300 },
-    height: { type: [Number, String], default: 300 },
+    height: { type: [Number, String], default: 'auto' },
     clickToClose: { type: Boolean, default: true },
     pivotX: { type: Number, default: 0.5 },
     pivotY: { type: Number, default: 0.5 },
@@ -67,11 +67,15 @@ export default {
       setTimeout(() => {
         this.$el.style.display = 'none'
         this.$emit('closed')
+        if (this.$el.parentElement instanceof window.HTMLBodyElement) {
+          this.$destroy()
+          this.$el.parentNode.removeChild(this.$el)
+        }
       }, this.duration * 1000)
     },
     // events ------------------------------------------------------------------
     onClickBackground() {
-      if (this.clickToClose) this.$modal.hide(this.$el.getAttribute('name'))
+      if (this.clickToClose) this.hide()
     },
     // utils -------------------------------------------------------------------
     map (n, fromStart, fromEnd, toStart, toEnd) {
@@ -81,7 +85,7 @@ export default {
 }
 </script>
 
-<style lang="stylus" scoped>
+<style lang="stylus">
 .v-modal
   box-sizing border-box
   position fixed
