@@ -9,6 +9,7 @@
 # projects
 .cache/
 .nuxt/
+demo/dist/
 dist/
 node_modules/
 .env
