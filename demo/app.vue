@@ -111,11 +111,15 @@ export default {
       this.$modal.show('alert', {
         message: 'Are you OK?',
         confirmButtonText: 'Yes',
+      }).then(function() {
+        console.log('You selected yes.')
       })
       setTimeout(() => {
         this.$modal.show('alert', {
           message: 'Are you sure you are OK?',
           confirmButtonText: 'Yes, I am Sure!',
+        }).then(function() {
+          console.log('You selected yes again.')
         })
       }, 1000)
     },

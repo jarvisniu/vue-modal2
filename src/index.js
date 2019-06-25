@@ -17,6 +17,16 @@ export default {
         } else {
           if (registeredModals[name]) {
             let vm = createVmInstance(registeredModals[name], props)
+            // console.log('vm', vm)
+            return new Promise(function (resolve, reject) {
+              if (vm.$children[0]) {
+                vm.$children[0].$on('closed', function () {
+                  resolve()
+                })
+              } else {
+                reject(new Error(`Can't find child component <v-modal2> on reusable modal`))
+              }
+            })
           } else {
             console.error(`[v-modal2] Can't find the modal with name "${name}"`)
           }
