@@ -1,16 +1,18 @@
 <template>
   <div
-    class="v-modal"
+    class="v-modal2--overlay"
+    :class="overlayClass"
     style="display: none; opacity: 0;"
-    :style="{
+    :style="[{
       background: background,
       transition: `opacity ${ duration }s`,
-    }"
-    @click.self="onClickBackground"
+    }, overlayStyle]"
+    @click.self="onClickOverlay"
   >
     <div
-      class="v-modal-container"
-      :style="{
+      class="v-modal2--content"
+      :class="contentClass"
+      :style="[contentStyle, {
         width: `${ width }px`,
         height: `${ height }px`,
         left: `${ pivotX * 100 }%`,
@@ -21,7 +23,7 @@
           ${ map(pivotX, 0, 1, 0, -100) }%,
           calc(${ map(pivotY, 0, 1, 0, -100) }% + ${ offsetY }px)
         )`,
-      }"
+      }]"
     >
       <slot></slot>
     </div>
@@ -36,7 +38,11 @@ export default {
     clickToClose: { type: Boolean, default: true },
     pivotX: { type: Number, default: 0.5 },
     pivotY: { type: Number, default: 0.5 },
-    background: { type: String, default: 'hsla(0, 0%, 25%, 0.5)' },
+    background: { type: String, default: 'rgba(0, 0, 0, 0.5)' },
+    overlayClass: { type: String, default: '' },
+    overlayStyle: { type: Object, default: () => {} },
+    contentClass: { type: String, default: '' },
+    contentStyle: { type: Object, default: () => {} },
     duration: { type: Number, default: 0.3 },
   },
   data () {
@@ -74,7 +80,7 @@ export default {
       }, this.duration * 1000)
     },
     // events ------------------------------------------------------------------
-    onClickBackground() {
+    onClickOverlay() {
       if (this.clickToClose) this.hide()
     },
     // utils -------------------------------------------------------------------
@@ -86,7 +92,7 @@ export default {
 </script>
 
 <style lang="stylus">
-.v-modal
+.v-modal2--overlay
   box-sizing border-box
   position fixed
   top 0
@@ -94,8 +100,9 @@ export default {
   width 100%
   height 100%
   padding 10px
+  z-index 2001
 
-.v-modal-container
+.v-modal2--content
   box-sizing border-box
   position relative
   border solid 1px silver

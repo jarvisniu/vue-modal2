@@ -22,9 +22,9 @@ Use your component:
 <template>
   <div>
     <button @click="$modal.show('greet')">Show Modal</h1>
-    <v-modal name="greet">
+    <v-modal2 name="greet">
       Welcome!
-    </v-modal>
+    </v-modal2>
   </div>
 </template>
 ```

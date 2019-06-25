@@ -7,27 +7,27 @@ let registeredModals = {}
 export default {
   install (Vue, options={}) {
     _Vue = Vue
-    Vue.component('VModal', Modal)
+    Vue.component('v-modal2', Modal)
 
     Vue.prototype.$modal = {
       show (name, props={}) {
-        let modalEl = document.querySelector(`.v-modal[name=${name}]`)
+        let modalEl = document.querySelector(`.v-modal2--overlay[name=${name}]`)
         if (modalEl) {
           modalEl.__vue__.show()
         } else {
           if (registeredModals[name]) {
             let vm = createVmInstance(registeredModals[name], props)
           } else {
-            console.error(`[v-modal] Can't find the modal with name "${name}"`)
+            console.error(`[v-modal2] Can't find the modal with name "${name}"`)
           }
         }
       },
       hide (name) {
-        let modalEl = document.querySelector(`.v-modal[name=${name}]`)
+        let modalEl = document.querySelector(`.v-modal2--overlay[name=${name}]`)
         if (modalEl) {
           modalEl.__vue__.hide()
         } else {
-          console.error(`[v-modal] Can't find the modal with name "${name}"`)
+          console.error(`[v-modal2] Can't find the modal with name "${name}"`)
         }
       },
     }

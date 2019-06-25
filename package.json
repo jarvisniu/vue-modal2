@@ -1,6 +1,6 @@
 {
   "name": "vue-modal2",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "A vue modal solution",
   "main": "dist/vue-modal2.esm.js",
   "module": "dist/vue-modal2.esm.js",

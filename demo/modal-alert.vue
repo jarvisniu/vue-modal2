@@ -1,5 +1,5 @@
 <template>
-  <v-modal ref="modal">
+  <v-modal2 ref="modal">
     <div style="padding: 10px">
       <h2 style="margin: 5px 0 10px;">{{ title }}</h2>
       <div>{{ message }}</div>
@@ -8,7 +8,7 @@
         @click="$refs.modal.hide()"
       >{{ confirmButtonText }}</button>
     </div>
-  </v-modal>
+  </v-modal2>
 </template>
 
 <script>
