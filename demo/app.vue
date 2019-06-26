@@ -2,7 +2,9 @@
   <div>
     <!-- Data Binding -------------------------------------------------------->
     <div>
-      <button @click="$modal.show('data-binding')">Data Binding</button>
+      <button class="demo-button"
+        @click="$modal.show('data-binding')"
+      >Data Binding</button>
       <span v-if="name">Hello, {{name}}!</span>
     </div>
 
@@ -25,26 +27,11 @@
       </div>
     </v-modal2>
 
-    <!-- Overlay/Content Style/Class ----------------------------------------->
-    <button @click="$modal.show('style-class')">Overlay/Content Class/Style</button>
-
-    <v-modal2
-      name="style-class"
-      :pivotY="0.33"
-      :overlay-style="{background: 'lightblue'}"
-      overlay-class="bd-blue"
-      :content-style="{border: 'solid 2px red', padding: '10px'}"
-      content-class="bg-pink"
-    >
-      <div>
-        The style and class can be passed to the overlay and the content elements.
-      </div>
-    </v-modal2>
-
-
     <!-- Dynamic Width ------------------------------------------------------->
     <div>
-      <button @click="$modal.show('dynamic-width')">Dynamic Width & Pivots</button>
+      <button class="demo-button"
+        @click="$modal.show('dynamic-width')"
+      >Dynamic Width & Pivots</button>
       <span>Modal status: {{openStatus}}
     </div>
 
@@ -70,11 +57,50 @@
       </div>
     </v-modal2>
 
-    <!-- Background & inner scroll & outer close button ---------------------->
-    <button @click="$modal.show('outer-close-button')">
-      Background & Inner Scroll & Outer Close Button
-    </button><br>
-    <v-modal2 name="outer-close-button" :height="250" :click-to-close="false" background="#333">
+    <!-- Percentage Width ------------------------------------------------------->
+    <div>
+      <button class="demo-button"
+        @click="$modal.show('percentage-width')"
+      >Percentage Width</button>
+    </div>
+
+    <v-modal2
+      name="percentage-width" width="50%" height="60%"
+    >
+      <div style="padding: 10px;">
+        Width: 50%<br>
+        Height: 60%
+      </div>
+    </v-modal2>
+
+    <!-- Overlay/Content Style/Class ----------------------------------------->
+    <div>
+      <button class="demo-button"
+        @click="$modal.show('style-class')"
+      >Overlay/Content Class/Style</button>
+    </div>
+
+    <v-modal2
+      name="style-class"
+      :pivotY="0.33"
+      :overlay-style="{background: 'lightblue'}"
+      overlay-class="bd-blue"
+      :content-style="{border: 'solid 2px red', padding: '10px'}"
+      content-class="bg-pink"
+    >
+      <div>
+        The style and class can be passed to the overlay and the content elements.
+      </div>
+    </v-modal2>
+
+    <!-- Inner scroll & outer close button ---------------------->
+    <div>
+      <button class="demo-button"
+        @click="$modal.show('outer-close-button')"
+      >Inner Scroll & Outer Close Button</button>
+    </div>
+
+    <v-modal2 name="outer-close-button" :height="250" :click-to-close="false" :overlay-style="{background:'#333'}">
       <div
         style="position: absolute; right: -28px; top: -28px; color: white; cursor: pointer; padding: 0 6px; font-size: 20px;"
         @click="$modal.hide('outer-close-button')"
@@ -89,9 +115,11 @@ One afternoon after one of these visits, the Princess thought, “Sometimes I wi
     </v-modal2>
 
     <!-- Reusable (global registered) modals -->
-    <button @click="showMultiAlert">
-      Reusable (Global Register)
-    </button><br>
+    <div>
+      <button class="demo-button" @click="showAlert">
+        Reusable (Global Register)
+      </button>
+    </div>
     <!-- End of demos-->
   </div>
 </template>
@@ -107,21 +135,13 @@ export default {
     }
   },
   methods: {
-    showMultiAlert() {
+    showAlert() {
       this.$modal.show('alert', {
         message: 'Are you OK?',
         confirmButtonText: 'Yes',
       }).then(function() {
         console.log('You selected yes.')
       })
-      setTimeout(() => {
-        this.$modal.show('alert', {
-          message: 'Are you sure you are OK?',
-          confirmButtonText: 'Yes, I am Sure!',
-        }).then(function() {
-          console.log('You selected yes again.')
-        })
-      }, 1000)
     },
   },
 }
@@ -136,10 +156,13 @@ export default {
 }
 </style>
 
-
 <style scoped>
 button {
   padding: 5px 20px;
   margin-bottom: 10px;
+}
+.demo-button {
+  width: 250px;
+  text-align: center;
 }
 </style>

@@ -3,18 +3,15 @@
     class="v-modal2--overlay"
     :class="overlayClass"
     style="display: none; opacity: 0;"
-    :style="[{
-      background: background,
-      transition: `opacity ${ duration }s`,
-    }, overlayStyle]"
+    :style="myOverlayStyle"
     @click.self="onClickOverlay"
   >
     <div
       class="v-modal2--content"
       :class="contentClass"
       :style="[contentStyle, {
-        width: `${ width }px`,
-        height: `${ height }px`,
+        width: myWidth,
+        height: myHeight,
         left: `${ pivotX * 100 }%`,
         top: `${ pivotY * 100 }%`,
         opacity: `${ opacity }`,
@@ -31,6 +28,8 @@
 </template>
 
 <script>
+const DEFAULT_OVERLAY_BACKGROUND = 'rgba(0, 0, 0, 0.5)'
+
 export default {
   props: {
     width: { type: [Number, String], default: 300 },
@@ -38,7 +37,6 @@ export default {
     clickToClose: { type: Boolean, default: true },
     pivotX: { type: Number, default: 0.5 },
     pivotY: { type: Number, default: 0.5 },
-    background: { type: String, default: 'rgba(0, 0, 0, 0.5)' },
     overlayClass: { type: String, default: '' },
     overlayStyle: { type: Object, default: () => {} },
     contentClass: { type: String, default: '' },
@@ -50,6 +48,38 @@ export default {
       offsetY: -50,
       opacity: 0,
     }
+  },
+  computed: {
+    myWidth() {
+      switch (typeof this.width) {
+      case 'number':
+        return `${this.width}px`
+        break
+      case 'string':
+        return /^\d+$/.test(this.width) ? `${this.width}px` : this.width
+        break
+      }
+    },
+    myHeight() {
+      switch (typeof this.height) {
+      case 'number':
+        return `${this.height}px`
+        break
+      case 'string':
+        return /^\d+$/.test(this.height) ? `${this.height}px` : this.height
+        break
+      }
+    },
+    myOverlayStyle() {
+      let overlayStyle = this.overlayStyle || {}
+      if (!overlayStyle.background) {
+        overlayStyle.background = DEFAULT_OVERLAY_BACKGROUND
+      }
+      if (!overlayStyle.transition) {
+        overlayStyle.transition = `opacity ${ this.duration }s`
+      }
+      return overlayStyle
+    },
   },
   methods: {
     // api ---------------------------------------------------------------------
