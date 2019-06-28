@@ -104,20 +104,28 @@
       >Theme</button>
     </div>
 
-    <v-modal2 name="theme" theme="dark">
-      <div>
-        You can add customized theme by adding styles for class
-        <code>.v-modal2--overlay[theme=theme-name]</code>
-        and <code>.v-modal2--content[theme=theme-name]</code> and then
-        set prop <code>theme</code> to <code>theme-name</code>.
+    <v-modal2 name="theme" :theme="theme">
+      <div style="padding: 10px">
+        <div>
+          You can add customized theme by adding styles for class
+          <code>.v-modal2--overlay[theme=theme-name]</code>
+          and <code>.v-modal2--content[theme=theme-name]</code> and then
+          set prop <code>theme</code> to <code>theme-name</code>.
+        </div>
+        <br>
+        <div>Dynamicly Switch Theme: </div>
+        <div>
+          <button @click="theme='default'">Default</button>
+          <button @click="theme='dark'">Dark(Customized)</button>
+        </div>
       </div>
     </v-modal2>
 
-    <!-- Inner scroll & outer close button ---------------------->
+    <!-- Inner scrolling & outer close button ---------------------->
     <div>
       <button class="demo-button"
         @click="$modal2.show('outer-close-button')"
-      >Inner Scroll & Outer Close Button</button>
+      >Inner Scrolling & Outer Close Button</button>
     </div>
 
     <v-modal2 name="outer-close-button" :height="250" :click-to-close="false" :overlay-style="{background:'#333'}">
@@ -152,6 +160,7 @@ export default {
       modalWidth: 300,
       pivotY: 0.5,
       openStatus: 'closed',
+      theme: 'dark',
     }
   },
   methods: {
@@ -182,7 +191,6 @@ export default {
 .v-modal2--content[theme=dark] {
   background-color: black;
   color: white;
-  padding: 10px;
 }
 </style>
 
