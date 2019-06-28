@@ -54,6 +54,7 @@ Use:
 | click-to-close | Boolean | false    | true                               |
 | pivotX         | Number  | false    | 0.5                                |
 | pivotY         | Number  | false    | 0.5                                |
+| theme          | String  | false    | 'default'                          |
 | overlay-class  | String  | false    | ''                                 |
 | overlay-style  | String  | false    | {background: 'rgba(0, 0, 0, 0.5)'} |
 | content-class  | String  | false    | ''                                 |

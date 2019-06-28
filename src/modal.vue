@@ -4,6 +4,7 @@
     :class="overlayClass"
     style="display: none; opacity: 0;"
     :style="myOverlayStyle"
+    :theme="theme"
     @click.self="onClickOverlay"
   >
     <div
@@ -21,6 +22,7 @@
           calc(${ map(pivotY, 0, 1, 0, -100) }% + ${ offsetY }px)
         )`,
       }]"
+      :theme="theme"
     >
       <slot></slot>
     </div>
@@ -28,8 +30,6 @@
 </template>
 
 <script>
-const DEFAULT_OVERLAY_BACKGROUND = 'rgba(0, 0, 0, 0.5)'
-
 export default {
   props: {
     width: { type: [Number, String], default: 300 },
@@ -37,6 +37,7 @@ export default {
     clickToClose: { type: Boolean, default: true },
     pivotX: { type: Number, default: 0.5 },
     pivotY: { type: Number, default: 0.5 },
+    theme: { type: String, default: 'default' },
     overlayClass: { type: String, default: '' },
     overlayStyle: { type: Object, default: () => {} },
     contentClass: { type: String, default: '' },
@@ -72,9 +73,6 @@ export default {
     },
     myOverlayStyle() {
       let overlayStyle = this.overlayStyle || {}
-      if (!overlayStyle.background) {
-        overlayStyle.background = DEFAULT_OVERLAY_BACKGROUND
-      }
       if (!overlayStyle.transition) {
         overlayStyle.transition = `opacity ${ this.duration }s`
       }
@@ -129,16 +127,21 @@ export default {
   left 0
   width 100%
   height 100%
-  padding 10px
   z-index 2001
+
+  &[theme=default]
+    background-color rgba(0, 0, 0, 0.5)
+    padding 10px // To ensure a minumum margin of the content box
 
 .v-modal2--content
   box-sizing border-box
   position relative
-  border solid 1px silver
-  background-color white
-  border-radius 5px
-  box-shadow 0 0 50px hsl(0, 0%, 50%)
   max-width 100%
   max-height 100%
+
+  &[theme=default]
+    border solid 1px silver
+    background-color white
+    border-radius 5px
+    box-shadow 0 0 50px hsl(0, 0%, 50%)
 </style>

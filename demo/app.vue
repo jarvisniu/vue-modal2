@@ -61,15 +61,13 @@
     <div>
       <button class="demo-button"
         @click="$modal2.show('percentage-width')"
-      >Percentage Width</button>
+      >Percentage Size</button>
     </div>
 
-    <v-modal2
-      name="percentage-width" width="50%" height="60%"
-    >
+    <v-modal2 name="percentage-width" width="50%" height="60%">
       <div style="padding: 10px;">
-        Width: 50%<br>
-        Height: 60%
+        In addition to pixel unit, The modal content box size (width & height) can be set percentage as well.<br>
+        <code>&lt;v-modal2 name="width" width="50%" height="60%"&gt;</code>
       </div>
     </v-modal2>
 
@@ -89,7 +87,29 @@
       content-class="bg-pink"
     >
       <div>
-        The style and class can be passed to the overlay and the content elements.
+        You can set the style or class attribute for the overlay or content elements by passing these props:
+        <ul>
+          <li><code>overlay-class</code></li>
+          <li><code>overlay-style</code></li>
+          <li><code>content-class</code></li>
+          <li><code>content-style</code></li>
+        </ul>
+      </div>
+    </v-modal2>
+
+    <!-- Theme ----------------------------------------->
+    <div>
+      <button class="demo-button"
+        @click="$modal2.show('theme')"
+      >Theme</button>
+    </div>
+
+    <v-modal2 name="theme" theme="dark">
+      <div>
+        You can add customized theme by adding styles for class
+        <code>.v-modal2--overlay[theme=theme-name]</code>
+        and <code>.v-modal2--content[theme=theme-name]</code> and then
+        set prop <code>theme</code> to <code>theme-name</code>.
       </div>
     </v-modal2>
 
@@ -153,6 +173,16 @@ export default {
 }
 .bd-blue {
   border: solid 2px blue;
+}
+
+/* customized theme */
+.v-modal2--overlay[theme=dark] {
+  background-color: rgba(64, 64, 64, 0.9);
+}
+.v-modal2--content[theme=dark] {
+  background-color: black;
+  color: white;
+  padding: 10px;
 }
 </style>
 
