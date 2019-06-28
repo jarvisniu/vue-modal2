@@ -2,34 +2,20 @@
 import Modal from './modal.vue'
 
 let _Vue
-let registeredModals = {}
+let _registeredModals = {}
 
 export default {
   install (Vue, options={}) {
     _Vue = Vue
     Vue.component('v-modal2', Modal)
 
-    Vue.prototype.$modal = {
-      show (name, props={}) {
+    let modal2 = {
+      show (name) {
         let modalEl = document.querySelector(`.v-modal2--overlay[name=${name}]`)
         if (modalEl) {
           modalEl.__vue__.show()
         } else {
-          if (registeredModals[name]) {
-            let vm = createVmInstance(registeredModals[name], props)
-            // console.log('vm', vm)
-            return new Promise(function (resolve, reject) {
-              if (vm.$children[0]) {
-                vm.$children[0].$on('closed', function () {
-                  resolve()
-                })
-              } else {
-                reject(new Error(`Can't find child component <v-modal2> on reusable modal`))
-              }
-            })
-          } else {
-            console.error(`[v-modal2] Can't find the modal with name "${name}"`)
-          }
+          console.error(`[v-modal2] Can't find the modal with name "${name}"`)
         }
       },
       hide (name) {
@@ -41,10 +27,31 @@ export default {
         }
       },
     }
+
     // register
     if (typeof options.register === 'object') {
-      registeredModals = options.register
+      _registeredModals = options.register
+      Object.keys(options.register).forEach(name => {
+        if (['show', 'hide'].includes(name)) {
+          console.error(`[v-modal2] Can't register modal with name "${name}". It's conflicted with API.`)
+          return
+        }
+
+        modal2[name] = function(props={}) {
+          let vm = createVmInstance(_registeredModals[name], props)
+          // console.log('vm', vm)
+          return new Promise(function (resolve, reject) {
+            let modalVm = vm.$children[0]
+            if (modalVm) {
+              modalVm.$on('closed', resolve)
+            } else {
+              reject(new Error(`Can't find child component <v-modal2> on reusable modal`))
+            }
+          })
+        }
+      })
     }
+    Vue.prototype.$modal2 = modal2
   },
 }
 

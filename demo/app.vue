@@ -3,7 +3,7 @@
     <!-- Data Binding -------------------------------------------------------->
     <div>
       <button class="demo-button"
-        @click="$modal.show('data-binding')"
+        @click="$modal2.show('data-binding')"
       >Data Binding</button>
       <span v-if="name">Hello, {{name}}!</span>
     </div>
@@ -17,12 +17,12 @@
           <input
             ref="input"
             v-model="name" style="width: 100px;"
-            @keydown.enter="$modal.hide('data-binding')"
+            @keydown.enter="$modal2.hide('data-binding')"
           >
         </div>
         <br>
         <div>
-          <button @click="$modal.hide('data-binding')">Confirm</button>
+          <button @click="$modal2.hide('data-binding')">Confirm</button>
         </div>
       </div>
     </v-modal2>
@@ -30,7 +30,7 @@
     <!-- Dynamic Width ------------------------------------------------------->
     <div>
       <button class="demo-button"
-        @click="$modal.show('dynamic-width')"
+        @click="$modal2.show('dynamic-width')"
       >Dynamic Width & Pivots</button>
       <span>Modal status: {{openStatus}}
     </div>
@@ -60,7 +60,7 @@
     <!-- Percentage Width ------------------------------------------------------->
     <div>
       <button class="demo-button"
-        @click="$modal.show('percentage-width')"
+        @click="$modal2.show('percentage-width')"
       >Percentage Width</button>
     </div>
 
@@ -76,7 +76,7 @@
     <!-- Overlay/Content Style/Class ----------------------------------------->
     <div>
       <button class="demo-button"
-        @click="$modal.show('style-class')"
+        @click="$modal2.show('style-class')"
       >Overlay/Content Class/Style</button>
     </div>
 
@@ -96,14 +96,14 @@
     <!-- Inner scroll & outer close button ---------------------->
     <div>
       <button class="demo-button"
-        @click="$modal.show('outer-close-button')"
+        @click="$modal2.show('outer-close-button')"
       >Inner Scroll & Outer Close Button</button>
     </div>
 
     <v-modal2 name="outer-close-button" :height="250" :click-to-close="false" :overlay-style="{background:'#333'}">
       <div
         style="position: absolute; right: -28px; top: -28px; color: white; cursor: pointer; padding: 0 6px; font-size: 20px;"
-        @click="$modal.hide('outer-close-button')"
+        @click="$modal2.hide('outer-close-button')"
       >×</div>
       <div style="height: 100%; overflow: auto; box-sizing: border-box; padding: 10px;">
 Once upon a time there was a Princess.  Many a suitor came to the palace to win her hand in marriage, but it seemed to the Princess that each one of them looked at her without really seeing her at all.
@@ -117,7 +117,7 @@ One afternoon after one of these visits, the Princess thought, “Sometimes I wi
     <!-- Reusable (global registered) modals -->
     <div>
       <button class="demo-button" @click="showAlert">
-        Reusable (Global Register)
+        Reusable (Global Registered)
       </button>
     </div>
     <!-- End of demos-->
@@ -136,11 +136,11 @@ export default {
   },
   methods: {
     showAlert() {
-      this.$modal.show('alert', {
+      this.$modal2.alert({
         message: 'Are you OK?',
         confirmButtonText: 'Yes',
       }).then(function() {
-        console.log('You selected yes.')
+        console.log('Alert closed.')
       })
     },
   },
