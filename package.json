@@ -1,14 +1,15 @@
 {
   "name": "vue-modal2",
-  "version": "0.3.0-beta.1",
+  "version": "0.3.0-beta.2",
   "description": "A vue modal solution",
   "main": "dist/vue-modal2.esm.js",
   "module": "dist/vue-modal2.esm.js",
   "scripts": {
-    "dev": "rm -rf demo/dist && parcel demo/index.html --out-dir demo/dist --no-source-maps --public-url=.",
+    "dev": "parcel demo/index.html --out-dir demo/dist",
+    "build-demo": "rm -rf demo/dist && parcel build demo/index.html --out-dir demo/dist --no-source-maps --public-url=.",
     "build-umd": "parcel build src/index.js --no-source-maps --out-dir dist --out-file vue-modal2.js",
     "build-esm": "rollup -c",
-    "build": "rm -rf dist && mkdir dist && npm run build-esm"
+    "build": "npm run build-demo && rm -rf dist && mkdir dist && npm run build-umd && npm run build-esm"
   },
   "author": "Jarvis Niu",
   "license": "MIT",

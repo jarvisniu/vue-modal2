@@ -43,10 +43,11 @@ export default {
     contentClass: { type: String, default: '' },
     contentStyle: { type: Object, default: () => {} },
     duration: { type: Number, default: 0.3 },
+    slideOffset: { type: Number, default: -50 },
   },
   data () {
     return {
-      offsetY: -50,
+      offsetY: this.slideOffset,
       opacity: 0,
     }
   },
@@ -95,7 +96,7 @@ export default {
     },
     hide () {
       this.$el.style.opacity = 0
-      this.offsetY = -50
+      this.offsetY = this.slideOffset
       this.opacity = 0
       this.$emit('before-close')
       setTimeout(() => {

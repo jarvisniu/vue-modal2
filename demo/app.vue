@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h2>vue-modal2 Demo</h2>
     <!-- Data Binding -------------------------------------------------------->
     <div>
       <button class="demo-button"
@@ -8,7 +9,7 @@
       <span v-if="name">Hello, {{name}}!</span>
     </div>
 
-    <v-modal2 name="data-binding" :pivotY="0.33" @opened="$refs.input.focus()">
+    <v-modal2 name="data-binding" :pivot-y="0.33" @opened="$refs.input.focus()">
       <div style="padding: 10px;">
         <h4 style="margin: 10px 0;">Data binding: </h4>
         <br>
@@ -32,15 +33,10 @@
       <button class="demo-button"
         @click="$modal2.show('dynamic-width')"
       >Dynamic Width & Pivots</button>
-      <span>Modal status: {{openStatus}}
     </div>
 
     <v-modal2
-      name="dynamic-width" :width="modalWidth" :pivotY="pivotY"
-      @before-open="openStatus = 'opening'"
-      @opened="openStatus = 'opened'"
-      @before-close="openStatus = 'closing'"
-      @closed="openStatus = 'closed'"
+      name="dynamic-width" :width="modalWidth" :pivot-y="pivotY"
     >
       <div style="padding: 10px;">
         <h4 style="margin: 10px 0;">Dynamic Width: </h4>
@@ -54,6 +50,32 @@
           <button @click="pivotY = 0.5">Middle</button>
           <button @click="pivotY = 0.9">Bottom</button>
         </div>
+      </div>
+    </v-modal2>
+
+    <!-- Events ------------------------------------------------------->
+    <div>
+      <button class="demo-button"
+        @click="$modal2.show('events')"
+      >Events ( {{openStatus}} )</button>
+    </div>
+
+    <v-modal2
+      name="events" width="500"
+      @before-open="openStatus = 'opening'"
+      @opened="openStatus = 'opened'"
+      @before-close="openStatus = 'closing'"
+      @closed="openStatus = 'closed'"
+    >
+      <div style="padding: 10px;">
+        <h4 style="margin: 10px 0;">Events</h4>
+        <div>You can track the modal status by listening these 4 events:</div>
+        <ul>
+          <li><code>before-open</code></li>
+          <li><code>opened</code></li>
+          <li><code>before-close</code></li>
+          <li><code>cloded</code></li>
+        </ul>
       </div>
     </v-modal2>
 
@@ -80,7 +102,7 @@
 
     <v-modal2
       name="style-class"
-      :pivotY="0.33"
+      :pivot-y="0.33"
       :overlay-style="{background: 'lightblue'}"
       overlay-class="bd-blue"
       :content-style="{border: 'solid 2px red', padding: '10px'}"
@@ -121,6 +143,22 @@
       </div>
     </v-modal2>
 
+    <!-- Bottom ----------------------------------------->
+    <div>
+      <button class="demo-button"
+        @click="$modal2.show('bottom')"
+      >Bottom (Action Sheet)</button>
+    </div>
+
+    <v-modal2
+      name="bottom" theme="bottom"
+      width="100%" :pivot-y="1" :slide-offset="50"
+    >
+      <div>
+        Bottom theme for action sheet
+      </div>
+    </v-modal2>
+
     <!-- Inner scrolling & outer close button ---------------------->
     <div>
       <button class="demo-button"
@@ -148,7 +186,11 @@ One afternoon after one of these visits, the Princess thought, “Sometimes I wi
         Reusable (Global Registered)
       </button>
     </div>
+
     <!-- End of demos-->
+    <a href="https://github.com/jarvisniu/vue-modal2/blob/master/demo/app.vue">
+      Source code of this demo page
+    </a>
   </div>
 </template>
 
@@ -191,6 +233,15 @@ export default {
 .v-modal2--content[theme=dark] {
   background-color: black;
   color: white;
+}
+.v-modal2--overlay[theme=bottom] {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.v-modal2--content[theme=bottom] {
+  width: 100%;
+  background-color: #f8f8f8;
+  border-top: solid 1px #666;
+  padding: 10px;
 }
 </style>
 

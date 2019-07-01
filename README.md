@@ -1,5 +1,7 @@
 # vue-modal2
 
+[Online Demo](https://unpkg.com/vue-modal2/demo/dist/index.html)
+
 ## Usage
 
 Install:
@@ -56,10 +58,11 @@ Use:
 | pivotY         | Number  | false    | 0.5                                |
 | theme          | String  | false    | 'default'                          |
 | overlay-class  | String  | false    | ''                                 |
-| overlay-style  | String  | false    | {background: 'rgba(0, 0, 0, 0.5)'} |
+| overlay-style  | Object  | false    | {}                                 |
 | content-class  | String  | false    | ''                                 |
-| content-style  | String  | false    | {}                                 |
+| content-style  | Object  | false    | {}                                 |
 | duration       | Number  | false    | 0.3                                |
+| slideOffset    | Number  | false    | -50                                |
 
 ### Events
 
