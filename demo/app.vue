@@ -172,11 +172,19 @@
         @click="$modal2.hide('outer-close-button')"
       >×</div>
       <div style="height: 100%; overflow: auto; box-sizing: border-box; padding: 10px;">
-Once upon a time there was a Princess.  Many a suitor came to the palace to win her hand in marriage, but it seemed to the Princess that each one of them looked at her without really seeing her at all.
+Once upon a time there was a Princess.
+Many a suitor came to the palace to win her hand in marriage,
+but it seemed to the Princess that each one of them looked at her without really seeing her at all.
 
 “They act like there’s nothing more to a princess than her fine crown and royal dresses,” she said to herself with a frown.
 
-One afternoon after one of these visits, the Princess thought, “Sometimes I wish I were little again.” She found her favorite ball from childhood, the one that sparkled when she threw it up high to the sun.  She took the ball to the palace yard and threw it higher and higher. One time she threw it extra high and when she ran to catch the ball, she tripped on a tree stump. The ball fell and plopped right down into the royal well!  She raced over to fetch her ball before it dropped too far, but by the time she got there she could no longer see it in the water.
+One afternoon after one of these visits, the Princess thought, “Sometimes I wish I were little again.”
+She found her favorite ball from childhood, the one that sparkled when she threw it up high to the sun.
+She took the ball to the palace yard and threw it higher and higher.
+One time she threw it extra high and when she ran to catch the ball,
+she tripped on a tree stump. The ball fell and plopped right down into the royal well!
+She raced over to fetch her ball before it dropped too far,
+but by the time she got there she could no longer see it in the water.
       </div>
     </v-modal2>
 
@@ -233,6 +241,7 @@ export default {
 .v-modal2--content[theme=dark] {
   background-color: black;
   color: white;
+  border: solid 1px silver;
 }
 .v-modal2--overlay[theme=bottom] {
   background-color: rgba(0, 0, 0, 0.5);
@@ -247,7 +256,7 @@ export default {
 
 <style scoped>
 button {
-  padding: 5px 20px;
+  padding: 5px;
   margin-bottom: 10px;
 }
 .demo-button {

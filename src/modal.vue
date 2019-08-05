@@ -39,9 +39,9 @@ export default {
     pivotY: { type: Number, default: 0.5 },
     theme: { type: String, default: 'default' },
     overlayClass: { type: String, default: '' },
-    overlayStyle: { type: Object, default: () => {} },
+    overlayStyle: { type: [Object, String], default: () => {} },
     contentClass: { type: String, default: '' },
-    contentStyle: { type: Object, default: () => {} },
+    contentStyle: { type: [Object, String], default: () => {} },
     duration: { type: Number, default: 0.3 },
     slideOffset: { type: Number, default: -50 },
   },
@@ -74,11 +74,20 @@ export default {
     },
     myOverlayStyle() {
       let overlayStyle = this.overlayStyle || {}
+      if (typeof overlayStyle === 'string') overlayStyle = {}
       if (!overlayStyle.transition) {
         overlayStyle.transition = `opacity ${ this.duration }s`
       }
       return overlayStyle
     },
+  },
+  created () {
+    if (typeof this.overlayStyle === 'string') {
+      console.error('[vue-modal2] Error: The type for prop `overlayStyle` must be Object rather than String.')
+    }
+    if (typeof this.contentStyle === 'string') {
+      console.error('[vue-modal2] Error: The type for prop `contentStyle` must be Object rather than String.')
+    }
   },
   methods: {
     // api ---------------------------------------------------------------------
