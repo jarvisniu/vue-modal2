@@ -1,6 +1,10 @@
 # vue-modal2
 
-[Online Demo](https://unpkg.com/vue-modal2/demo/dist/index.html)
+> Simple Vue Modal
+
+## Demo
+
+[Demo](https://unpkg.com/vue-modal2/demo/dist/index.html)
 
 ## Usage
 
@@ -40,14 +44,66 @@ Use:
 </template>
 ```
 
+## Advanced Usage (Reusable Modal)
+
+1. Write an component that wrap your reusable modal:
+
+```html
+<!-- modal-alert.vue -->
+<template>
+  <v-modal2 ref="modal">
+    <div style="padding: 10px">
+      <h2 style="margin: 5px 0 10px;">{{ title }}</h2>
+      <div>{{ message }}</div>
+      <button
+        style="display: block; width: 100%; padding: 5px; margin-top: 10px;"
+        @click="$refs.modal.hide()"
+      >OK</button>
+    </div>
+  </v-modal2>
+</template>
+
+<script>
+export default {
+  props: {
+    message: { type: String, required: true },
+    title: { type: String, default: 'Warning' },
+  },
+}
+</script>
+```
+
+2. Import and register it:
+
+```js
+// main.js
+import ModalAlert from './modal-alert.vue'
+
+Vue.use(VModal, {
+  register: {
+    'alert': ModalAlert,
+  },
+})
+```
+
+3. Show the modal in any vue component:
+
+```js
+// app.vue
+this.$modal2.alert({
+  message: 'Are you OK?',
+})
+```
+
 ## API
 
-### $modal2
+### Vue.prototype.$modal2
 
 - `show(name)`: Show the modal with name `name`;
 - `hide(name)`: Hide the modal with name `name`;
+- `<modalName>(props)`: Show the globally registered reusable modal;
 
-### Props
+### &lt;v-modal2&gt; props
 
 | Name           | Type    | Required | Default                            |
 | --             | --      | --       | --                                 |
@@ -64,7 +120,7 @@ Use:
 | duration       | Number  | false    | 0.3                                |
 | slideOffset    | Number  | false    | -50                                |
 
-### Events
+### &lt;v-modal2&gt; events
 
 - before-open
 - opened

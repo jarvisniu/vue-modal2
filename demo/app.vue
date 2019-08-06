@@ -147,7 +147,7 @@
     <div>
       <button class="demo-button"
         @click="$modal2.show('bottom')"
-      >Bottom (Action Sheet)</button>
+      >Slide From Bottom</button>
     </div>
 
     <v-modal2
@@ -155,7 +155,8 @@
       width="100%" :pivot-y="1" :slide-offset="50"
     >
       <div>
-        Bottom theme for action sheet
+        Set prop :pivot-y="1" and :slide-offset="50" can make the modal slide from bottom.<br>
+        This is useful to make an action sheet etc.
       </div>
     </v-modal2>
 
@@ -216,10 +217,7 @@ export default {
   methods: {
     showAlert() {
       this.$modal2.alert({
-        message: 'Are you OK?',
-        confirmButtonText: 'Yes',
-      }).then(function() {
-        console.log('Alert closed.')
+        message: 'Your battery is low!',
       })
     },
   },
